@@ -1,2 +1,2 @@
 # myLeetcodeSolutions
-This is my own repository containing my C++ solutions to Leetcode problems.
+This is my own repository containing my solutions to Leetcode problems in C++.
