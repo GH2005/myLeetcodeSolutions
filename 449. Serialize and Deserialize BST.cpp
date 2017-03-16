@@ -16,8 +16,8 @@ public:
         if (!root) return res;
         res += 'b';
         int v = root->val;
-        if (root->left) { res += this->serialize(root->left) + 'l'; }
         if (root->right) { res += this->serialize(root->right) + 'r'; }
+        if (root->left) { res += this->serialize(root->left) + 'l'; }
         res += to_string(v);
         return res;
     }
@@ -31,21 +31,16 @@ public:
     
     TreeNode *helper(string &data, int &len) {
         int numLen = 0;
-        for (int pos = len - 1; 0 <= pos; pos--) {
+        for (int pos = len - 1; 0 <= pos; --pos) {
             if (('0' <= data[pos] && data[pos] <= '9') || data[pos] == '-') ++numLen;
             else break;
         }
         int v = stoi(data.substr(len - numLen, numLen));
         TreeNode *aNode = new TreeNode(v);
         len -= numLen;
-        while (1) {// read a letter 'l', 'r' or 'b'
-            if (data[len-1] == 'l') {
-                len--;
-                aNode->left = this->helper(data, len);
-            }
-            if (data[len-1] == 'r') { len--; aNode->right = this->helper(data, len); }
-            if (data[len-1] == 'b') { len--; return aNode; }
-        }
+        if (data[len-1] == 'l') { len--; aNode->left = this->helper(data, len); }
+        if (data[len-1] == 'r') { len--; aNode->right = this->helper(data, len); }
+        if (data[len-1] == 'b') { len--; return aNode; }
     }
 };
 
