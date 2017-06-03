@@ -4,8 +4,9 @@ public:
         int res = 0;
         for (int left = 0, right = left; right < prices.size(); right++)
         {
-            if (prices[left] > prices[right]) left = right;
-            res = max(res, prices[right] - prices[left]);
+            int diff = prices[right] - prices[left];
+            if (diff < 0) left = right;
+            else res = max(res, diff);
         }
         return res;
     }
